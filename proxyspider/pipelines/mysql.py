@@ -18,7 +18,6 @@ class writeTo(object):
             'use_unicode':True,
             'raise_on_warnings':True
         }
-        print(config_args)
         
         try:
             self.cnx = mysql.connector.connect(**config_args)
