@@ -28,12 +28,12 @@ LOC_WRITE_JSON=r"./x.json"
 LOC_WRITE_CSV=r"./x.csv"
 
 MYSQL_DB={
-    "host":,
-    "port":,
-    "username":,
-    "passwd":,
-    "database_name":,
-    "table_name":,
+    "host":"192.168.63.131",
+    "port":"3306",
+    "username":"dev",
+    "passwd":"dev",
+    "database_name":"devdb",
+    "table_name":"tb_ip",
 }
 
 #***********************custom settings end******************************
@@ -91,7 +91,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'proxyspider.pipelines.json.dumpTo': 300,
-#    'proxyspider.pipelines.mysql.writeTo': 301,
+    'proxyspider.pipelines.mysql.writeTo': 301,
 #    'proxyspider.pipelines.csv.writeTo': 302,
 #    'proxyspider.pipelines.csv.hashWriteTo': 303,
 #    'proxyspider.pipelines.mongo.writeTo': 304,

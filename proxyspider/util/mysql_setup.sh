@@ -1,7 +1,7 @@
 #!bash
 DB_ROOT_PW=root
 DB_USER=dev
-DB_PW=mysql
+DB_PW=dev
 DB_DATA_PATH=/var/docker_data/mysql/data/
 DB_PROT=3306
 

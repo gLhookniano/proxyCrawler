@@ -1,23 +1,24 @@
 #coding:utf-8
 import logging
-import mysql
+
+import mysql.connector
+from mysql.connector import errorcode
 
 logger = logging.getLogger(__name__)
 
 class writeTo(object):
-'''
-mysql/mariedb数据库写入
-'''
+#mysql/mariedb数据库写入
     def __init__(self, host, port, username, passwd, database_name, table_name):
         config_args = {
             'user':username,
             'password':passwd,
             'host':host,
             'database':database_name,
-            'charset':'utf-8',
+            'charset':'utf8',
             'use_unicode':True,
             'raise_on_warnings':True
         }
+        print(config_args)
         
         try:
             self.cnx = mysql.connector.connect(**config_args)
@@ -33,12 +34,12 @@ mysql/mariedb数据库写入
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            host=crawler.settings.get('MYSQL_DB', 'host'),
-            port=crawler.settings.get('MYSQL_DB', 'port'),
-            username=crawler.settings.get('MYSQL_DB', 'username'),
-            passwd=crawler.settings.get('MYSQL_DB', 'passwd'),
-            database_name=crawler.settings.get('MYSQL_DB', 'database_name'),
-            table_name=crawler.settings.get('MYSQL_DB', 'table_name'),
+            host=crawler.settings['MYSQL_DB']['host'],
+            port=crawler.settings['MYSQL_DB']['port'],
+            username=crawler.settings['MYSQL_DB']['username'],
+            passwd=crawler.settings['MYSQL_DB']['passwd'],
+            database_name=crawler.settings['MYSQL_DB']['database_name'],
+            table_name=crawler.settings['MYSQL_DB']['table_name'],
         )
         
     def close_spider(self, spider):
@@ -46,19 +47,13 @@ mysql/mariedb数据库写入
         self.cnx.close()
 
     def process_item(self, item, spider):
-        sql ="insert into devdb.tb_ip (hash256, protocol, address, port, position, anonymity, speed, live) values(%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql ="insert into devdb.tb_ip (protocol, address, port) values('{}', '{}', {}) on duplicate key update id=id"
         sql_value = (
-            item["hash256"], 
             item["protocol"],
             item["address"],
             item["port"],
-            item["position"],
-            item["anonymity"],
-            item["speed"],
-            item["live"],
-            item["check_time"]
             )
         
-        self.cursor.execute(sql, sql_value)
+        self.cursor.execute(sql.format(*sql_value))
         self.cnx.commit()
         return item
