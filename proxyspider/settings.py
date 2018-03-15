@@ -21,8 +21,7 @@ LOG_ENABLED=True
 #**********************custom settings start****************************
 LOC_PROXY_LIST=r"./proxyspider/util/proxylist.csv"
 LOC_USERAGENT_LIST=r"./proxyspider/util/useragentswitcher.xml"
-#Windows Mac Linux Unix Mobile Spiders Miscellaneous
-USERAGENT_PLATFORM=r'Windows'
+USERAGENT_FILTER=r'Windows'#Windows Mac Linux Unix Mobile Spiders Miscellaneous
 
 LOC_WRITE_JSON=r"./x.json"
 LOC_WRITE_CSV=r"./x.csv"
@@ -34,6 +33,15 @@ MYSQL_DB={
     "passwd":"dev",
     "database_name":"devdb",
     "table_name":"tb_ip",
+}
+
+MONGO_DB={
+    "host":"192.168.63.133",
+    "port":"27017",
+    "username":"dev",
+    "passwd":"dev",
+    "database_name":"devdb",
+    "collection_name":"test",
 }
 
 #***********************custom settings end******************************
@@ -91,10 +99,10 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'proxyspider.pipelines.json.dumpTo': 300,
-    'proxyspider.pipelines.mysql.writeTo': 301,
+#    'proxyspider.pipelines.mysql.writeTo': 301,
 #    'proxyspider.pipelines.csv.writeTo': 302,
 #    'proxyspider.pipelines.csv.hashWriteTo': 303,
-#    'proxyspider.pipelines.mongo.writeTo': 304,
+    'proxyspider.pipelines.mongo.writeTo': 304,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

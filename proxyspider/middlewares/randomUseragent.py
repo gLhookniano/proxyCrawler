@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 class randomUseragent(object):
     def __init__(self, settings):
         loc_proxy_list = settings.get('LOC_USERAGENT_LIST')
-        useragent_platform = settings.get('USERAGENT_PLATFORM')
+        useragent_platform = settings.get('USERAGENT_FILTER')
   
         if loc_proxy_list:
             with open(loc_proxy_list, 'r') as fp:
