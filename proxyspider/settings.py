@@ -14,7 +14,7 @@ BOT_NAME = 'proxyspider'
 SPIDER_MODULES = ['proxyspider.spiders']
 NEWSPIDER_MODULE = 'proxyspider.spiders'
 
-LOG_FILE=r"./log.txt"
+LOG_FILE=r"./log.log"
 LOG_ENCODING="utf-8"
 LOG_ENABLED=True
 

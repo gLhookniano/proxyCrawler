@@ -18,8 +18,8 @@ include freeproxylists, goubanjia, hidemyass, mimvp, xici
 2. databases settings:
     1. mysql 
         1. modify `./DB/mysql_setup.sh`
-        2. sh `./DB/mysql_setup.sh`
+        2. `sh ./DB/mysql_setup.sh`
     2. mongo
         1. modify `./DB/mongo_setup.sh`
-        2. sh `./DB/mysql_setup.sh`
-3. python ./run.py or scrapy crawl xici
+        2. `sh ./DB/mysql_setup.sh`
+3. `python ./run.py` or `scrapy crawl xici`
