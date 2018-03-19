@@ -1,4 +1,3 @@
-#!python3
 #coding: utf-8
 import logging
 import scrapy
@@ -7,11 +6,11 @@ from proxyspider.items.proxy import proxyItem
 
 logger = logging.getLogger(__name__)
 
-class mimvpSpider(scrapy.Spider):
-    name = "mimvp"
-
+class kuaidailiSpider(scrapy.Spider):
+    name = "kuaidaili"
+    
     def __init__(self, settings):
-        super(mimvpSpider, self).__init__()
+        super(kuaidailiSpider, self).__init__()
         self.allowed_domains = settings["allowed_domains"]
         self.start_urls = settings['start_urls']
         self.xpath = settings['xpath']
@@ -20,7 +19,7 @@ class mimvpSpider(scrapy.Spider):
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            crawler.settings['MIMVP_PATTERN']
+            crawler.settings['KUAIDAILI_PATTERN']
         )
         
     def parse(self, response):
@@ -40,6 +39,3 @@ class mimvpSpider(scrapy.Spider):
             else:
                 item['protocol'] = row.xpath(self.item_xpath['protocol'])[0]
             yield item
-            
-    def _picture_parse(self, response):
-        pass

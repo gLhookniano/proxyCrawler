@@ -6,10 +6,19 @@ from lxml import etree
 from proxyspider.items.proxy import proxyItem
 
 
-class hidemyassSpider(scrapy.Spider):
-    name = "HMA"
-    allowed_domains = ["proxylist.hidemyass.com"]
-    start_urls = ['http://proxylist.hidemyass.com/']
+class hmaSpider(scrapy.Spider):
+    name = "hma"
+    
+    def __init__(self, settings):
+        super(hmaSpider, self).__init__()
+        self.allowed_domains = settings["allowed_domains"]
+        self.start_urls = settings['start_urls']
+        
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            crawler.settings['HMA_PATTERN']
+        )
 
     def parse(self, response):
         for row in etree.HTML(response.body).xpath("//table//tr")[1:]:

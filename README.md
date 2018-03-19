@@ -1,6 +1,5 @@
 # proxySpider
-get proxy ip from proxy-website
-include freeproxylists, goubanjia, hidemyass, mimvp, xici
+get proxy ip from proxy-website, use scrapy
 
 ## Requirements :
 * scrapy lxml pymysql pymongo
@@ -8,6 +7,9 @@ include freeproxylists, goubanjia, hidemyass, mimvp, xici
 ## support databases :
 * mysql
 * mongo
+
+## support website :
+    66ip cnproxy cz88 freeproxylist hidemyass incloak ip181 kuaidaili mimiip mimvp xici
 
 ## middleware :
 * random useragent
@@ -21,5 +23,9 @@ include freeproxylists, goubanjia, hidemyass, mimvp, xici
         2. `sh ./DB/mysql_setup.sh`
     2. mongo
         1. modify `./DB/mongo_setup.sh`
-        2. `sh ./DB/mysql_setup.sh`
-3. `python ./run.py` or `scrapy crawl xici`
+        2. `sh ./DB/mongo_setup.sh`
+    3. redis
+        1. modify `./DB/mongo_setup.sh`
+        2. `sh ./DB/mongo_setup.sh`
+3. `python ./run.py`
+

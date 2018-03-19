@@ -4,13 +4,19 @@ import scrapy
 from lxml import etree
 from proxyspider.items.proxy import proxyItem
 
-class FPLSpider(scrapy.Spider):
-    name = "FPL"
-    allowed_domains = ["freeproxylists.net"]
-    start_urls = [
-    'http://freeproxylists.net/country/',
-    ]
+class fplSpider(scrapy.Spider):
+    name = "fpl"
 
+    def __init__(self, settings):
+        super(fplSpider, self).__init__()
+        self.allowed_domains = settings["allowed_domains"]
+        self.start_urls = settings['start_urls']
+        
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            crawler.settings['FPL_PATTERN']
+        )
     def parse(self, response):
         for row in etree.HTML(response.body).xpath("//table[@class='DataGrid']//tr")[1:]:
             sec_page = start_urls[0] + ''.join(row.xpath("td/a/@href"))

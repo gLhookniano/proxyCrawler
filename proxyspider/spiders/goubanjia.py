@@ -5,14 +5,19 @@ import scrapy
 from lxml import etree
 from proxyspider.items.proxy import proxyItem
 
-class GoubanjiaSpider(scrapy.Spider):
-    name = "GBJ"
-    allowed_domains = ["goubanjia.com"]
-    start_urls = [
-    'http://www.goubanjia.com/free/gwgn/',
-    'http://www.goubanjia.com/free/gngn/',
-    ]
+class gbjSpider(scrapy.Spider):
+    name = "gbj"
 
+    def __init__(self, settings):
+        super(gbjSpider, self).__init__()
+        self.allowed_domains = settings["allowed_domains"]
+        self.start_urls = settings['start_urls']
+        
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            crawler.settings['GBJ_PATTERN']
+        )
     def parse(self, response):
         for row in etree.HTML(response.body).xpath('//table//tr'):
             column = row.xpath('td')
